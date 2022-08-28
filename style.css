@@ -65,20 +65,24 @@ ul {
     height: auto;
     padding: 20px 0;
 }
+.mensagem span:first-child{
+    color: #AAAAAA;
+    margin-right: 5px;
+}
 .mensagem{
     border-radius: 2px;
     width: 100%;
     height: auto;
     padding: 15px 10px;
     margin-bottom: 4px;
-    line-height: 20px
+    line-height: 20px;
 }
 .status{
     background: #DCDCDC;
 }
-.normal{
+.message{
     background-color: white;
 }
-.reservado{
+.private_message{
     background: #FFDEDE;
 }
