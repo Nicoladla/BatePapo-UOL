@@ -76,6 +76,7 @@ ul {
     padding: 15px 10px;
     margin-bottom: 4px;
     line-height: 20px;
+    overflow: hidden;
 }
 .status{
     background: #DCDCDC;

@@ -33,7 +33,6 @@ function buscarMsg(){
 
     //Aqui os dados são analizados e enviados para outra função.
 const campoDasMsg= document.querySelector(".campo-das-msg");
-
 function analizarDados(dados){
     campoDasMsg.innerHTML= "";
 
@@ -68,3 +67,20 @@ function renderizarMsg(res, j, formataçao){
 
     //Aqui é onde o chat é atualizado.
 const atualizarMsg= setInterval(buscarMsg, 3000);
+
+//Essa é a parte responsável pelo envio das mensagens.
+function enviarMsg(){
+    const mensagem= document.querySelector(".barra-msg input");
+    const msgFormatada={
+        from: NomeDoUsuario,
+        to: "Todos",
+        text: mensagem.value,
+        type: "message"
+    }
+
+    const enviar= axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', msgFormatada);
+    enviar.then(buscarMsg);
+
+    mensagem.value= "";
+    mensagem.focus();
+}
