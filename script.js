@@ -1,29 +1,43 @@
-//Essa é a parte em que o usuário cadastra seu nome para entrar no site.
-let NomeDoUsuario;
-function cadastrarUsuario(erro){
-    //Aqui é verificado se o parametro 'erro' esteja vazio.
-    //Caso não esteja vazio, significa que a função foi chamada novamente por causa de um erro de cadastro de usuário.
-    if(erro === undefined){
-        NomeDoUsuario= prompt("Digite seu nome:");
-    }else{
-        NomeDoUsuario= prompt("Usuário já cadastrado, insira outro nome.");
-    }
-
-    while(NomeDoUsuario === null){
-        NomeDoUsuario= prompt("Digite um nome:")
-    }
-
-    const cadastrarNome= axios.post('https://mock-api.driven.com.br/api/v6/uol/participants', {name:`${NomeDoUsuario}`});
-    cadastrarNome.then(buscarMsg);
-    cadastrarNome.catch(cadastrarUsuario);
-}
-cadastrarUsuario();
-
-    //Aqui é onde o servidor sabe se o usuário ainda esta online.
+//Aqui é onde o servidor sabe se o usuário ainda esta online.
 function usuarioOnline(){
     const online= axios.post("https://mock-api.driven.com.br/api/v6/uol/status", {name:`${NomeDoUsuario}`});
 }
-const statusUsuário= setInterval(usuarioOnline, 5000);
+
+//Essa é a parte em que é feito a troca de tela, e o usuário acessa o chat.
+function trocarDeTela(recebidos){
+    const telaInicial= document.querySelector(".cadastrar-usuario");
+    const chat= document.querySelector(".chat");
+
+    chat.classList.remove("desligado");
+    telaInicial.classList.add("desligado");
+
+    const statusUsuário= setInterval(usuarioOnline, 5000);
+    buscarMsg();
+    const atualizarMsg= setInterval(buscarMsg, 3000);
+}
+
+//Essa é a parte em que o usuário cadastra seu nome para entrar no site.
+    //Aqui o usuário pode cadastrar o nome utilizando a tecla 'enter'.
+const qualSeuNome= document.querySelector(".cadastrar-usuario input");
+
+qualSeuNome.addEventListener("keypress", function(e){
+    if(e.key === "Enter"){
+        cadastrarUsuario();
+    }
+});
+
+let NomeDoUsuario;
+function cadastrarUsuario(){
+    NomeDoUsuario= qualSeuNome.value;
+
+    const cadastrarNome= axios.post('https://mock-api.driven.com.br/api/v6/uol/participants', {name:`${NomeDoUsuario}`});
+    cadastrarNome.then(trocarDeTela);
+    cadastrarNome.catch((erro) => {
+        qualSeuNome.value='';
+        qualSeuNome.focus();
+        qualSeuNome.placeholder=`Insira outro nome`;
+    });
+}
 
 //Essa é a parte responsável por exibir e atualizar as mensagens no chat.
 function buscarMsg(){
@@ -65,15 +79,12 @@ function renderizarMsg(res, j, formataçao){
         `;
 }
 
-    //Aqui é onde o chat é atualizado.
-const atualizarMsg= setInterval(buscarMsg, 3000);
-
 //Essa é a parte responsável pelo envio das mensagens.
 const mensagem= document.querySelector(".barra-msg input");
     //Aqui é configurado o envio da msg com a tecla 'enter'.
 mensagem.addEventListener("keypress", function(e){
     if(e.key === "Enter"){
-        enviarMsg()
+        enviarMsg();
     }
 });
 
