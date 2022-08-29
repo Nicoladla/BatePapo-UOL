@@ -69,8 +69,15 @@ function renderizarMsg(res, j, formataçao){
 const atualizarMsg= setInterval(buscarMsg, 3000);
 
 //Essa é a parte responsável pelo envio das mensagens.
+const mensagem= document.querySelector(".barra-msg input");
+    //Aqui é configurado o envio da msg com a tecla 'enter'.
+mensagem.addEventListener("keypress", function(e){
+    if(e.key === "Enter"){
+        enviarMsg()
+    }
+});
+
 function enviarMsg(){
-    const mensagem= document.querySelector(".barra-msg input");
     const msgFormatada={
         from: NomeDoUsuario,
         to: "Todos",
