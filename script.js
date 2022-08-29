@@ -11,9 +11,9 @@ function trocarDeTela(recebidos){
     chat.classList.remove("desligado");
     telaInicial.classList.add("desligado");
 
-    const statusUsuário= setInterval(usuarioOnline, 5000);
+    setInterval(usuarioOnline, 5000);
     buscarMsg();
-    const atualizarMsg= setInterval(buscarMsg, 3000);
+    setInterval(buscarMsg, 3000);
 }
 
 //Essa é a parte em que o usuário cadastra seu nome para entrar no site.
