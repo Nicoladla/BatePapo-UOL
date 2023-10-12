@@ -31,10 +31,12 @@ Essa aplicação foi desenvolvida utilizando as tecnologias:
 
 ### Como iniciar o projeto na minha máquina?
 
-* O primeiro passo é você fazer o download do projeto para sua máquina ou então clonar esse repositório através do seu terminal:
+* O primeiro passo é você fazer o download do projeto para sua máquina: [Download ZIP](https://github.com/Nicoladla/BatePapo-UOL/archive/refs/heads/main.zip)
 
-```
-git clone https://github.com/Nicoladla/BatePapo-UOL.git
-```
+* Ou então clonar esse repositório através do seu terminal:
+
+  ```
+  git clone https://github.com/Nicoladla/BatePapo-UOL.git
+  ```
 
 * Após isso, você pode entrar na pasta do projeto e abrir o arquivo ``index.html`` no seu navegador.
